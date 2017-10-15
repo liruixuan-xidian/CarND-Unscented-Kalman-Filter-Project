@@ -58,15 +58,33 @@ public:
   ///* Weights of sigma points
   VectorXd weights_;
 
+  // Measurement matrix
+  MatrixXd H_laser_;
+
   ///* State dimension
   int n_x_;
 
   ///* Augmented state dimension
   int n_aug_;
 
+  ///* measurement state dimension
+  int n_z_laser_; 
+
+  ///* measurement state dimension
+  int n_z_radar_; 
+  
   ///* Sigma point spreading parameter
   double lambda_;
 
+  ///*Sigma point spreading coefficient
+  double sigma_spread_coef_;
+
+  ///* measurement noise cpvariance matrix
+  MatrixXd R_radar_;
+
+  MatrixXd R_laser_;
+  MatrixXd R_;
+  ///*
 
   /**
    * Constructor
@@ -102,6 +120,9 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+  void NormalizeAngle(double& phi);
+
 };
 
 #endif /* UKF_H */
